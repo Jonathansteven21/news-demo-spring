@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="/fragments/head :: head"></head>
+
+
+<body>
+<header class="header">
+    <h1 class="header__title">Egg News</h1>
+</header>
+<nav class="navbar">
+    <ul class="menu__navigation">
+        <li class="button" th:if="${session.usersession == null}">
+            <a href="/register">Register</a>
+        </li>
+        <li class="button" th:if="${session.usersession == null}">
+            <a href="/login">Login</a>
+        </li>
+        <li class="button">
+            <a href="/logout">Logout</a>
+        </li>
+        <li class="menu__option button">
+            <a href="/news">News</a>
+        </li>
+        <li class="menu__option button">
+            <a href="/author">Authors</a>
+        </li>
+    </ul>
+</nav>
+
+<img class="logo" th:src="@{|/image/profile/${session.usersession.id}|}" alt="Img logo egg">
+<div th:if="${success != null}" class="form__messages">
+    <div class="form__error message message-success">
+        <h5> Success 😊: </h5>
+        <p th:text="${success}"></p>
+    </div>
+</div>
+
+<footer class="footer"></footer>
+</body>
+</html>

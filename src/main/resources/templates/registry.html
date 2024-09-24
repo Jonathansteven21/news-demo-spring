@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/fragments/head :: head"></head>
+
+
+<body>
+<header class="header">
+    <h1 class="header__title">Create your News Account</h1>
+</header>
+
+
+<section id="form">
+    <form class="form form__container" th:action="@{/registry}" method="POST" enctype="multipart/form-data">
+        <div class="form__inputs flex-direction--column font-size-medium">
+            <div class="form__name form__column margin-bottom--1">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" th:value="${name}" placeholder="Full Name"/>
+            </div>
+            <div class="form__email form__column margin-bottom--1">
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" th:value="${email}" placeholder="email@example.com"/>
+            </div>
+            <div class="form__password form__column margin-bottom--1">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" th:value="${password}" placeholder="Enter password"/>
+            </div>
+            <div class="form__password form__column margin-bottom--1">
+                <label for="password2">Confirm password</label>
+                <input type="password" id="password2" name="password2" th:value="${password2}"/>
+            </div>
+            <div class="form__image form__column margin-bottom--1">
+                <label for="file">Profile Photo</label>
+                <input type="file" id="file" name="file" />
+            </div>
+        </div>
+        <button type="submit" class="form__submit margin-bottom--1">Create Account</button>
+    </form>
+    <div th:if="${error != null}" class="form__messages">
+        <div class="form__error message message-error">
+            <h5> Error ☹️ </h5>
+            <p th:text="${error}"></p>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <button class="footer__back button">
+        <a href="/">Back</a>
+    </button>
+</footer>
+</body>
+</html>

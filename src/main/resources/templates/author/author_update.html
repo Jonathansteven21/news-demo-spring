@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="./../../css/styles.css"/>
+    <title>Update Author</title>
+</head>
+
+<body>
+<header class="header">
+    <h1 class="header__title">Update Author</h1>
+</header>
+
+<section id="form">
+    <form class="form" th:action="@{/author/set/__${author.id}__}" method="POST">
+        <label>
+            <input hidden th:value="${author.id}" name="id">
+        </label>
+        <div class="form__inputs">
+            <div class="form__first-name vertical-center">
+                <label for="name">Name:</label>
+                <input class="form__input" type="text" id="name" name="name" th:value="${author.name}" placeholder="Name"/>
+            </div>
+        </div>
+        <button type="submit" class="form__submit vertical-center margin-bottom--4">Update</button>
+    </form>
+    <div th:if="${error != null}" class="form__messages">
+        <div class="form__error message message-error">
+            <h5>Error ☹️</h5>
+            <p th:text="${error}"></p>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+    <button class="footer__back button">
+        <a href="/author">Back</a>
+    </button>
+</footer>
+</body>
+</html>

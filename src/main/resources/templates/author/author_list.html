@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="./../../static/css/styles.css"/>
+    <link rel="stylesheet" href="./../css/styles.css"/>
+    <title>Author List</title>
+</head>
+
+<body>
+<header class="header">
+    <h1 class="header__title">Author List</h1>
+</header>
+
+<section id="list" class="table__container">
+    <table class="table">
+        <thead>
+        <tr class="table__column">
+            <th class="table__title">ID</th>
+            <th class="table__title">Name</th>
+            <th class="table__title" sec:authorize="hasRole('ROLE_ADMIN')">Update</th>
+            <div sec:authorize="isAuthenticated()">
+                Logged in as: <span sec:authentication="name"></span>
+                Roles: <span sec:authentication="principal.authorities"></span>
+            </div>
+
+        </tr>
+        </thead>
+        <tbody th:each="author: ${authors}">
+        <tr class="table__column">
+            <td class="table__row" th:text="${author.id}"></td>
+            <td class="table__row" th:text="${author.name}"></td>
+            <td class="table__row">
+                <a sec:authorize="hasRole('ADMIN')" th:href="@{/author/set/__${author.id}__}">Update</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</section>
+
+
+<footer class="footer">
+    <button class="footer__back button">
+        <a href="/author">Back</a>
+    </button>
+</footer>
+</body>
+</html>

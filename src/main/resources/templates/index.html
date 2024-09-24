@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head th:replace="/fragments/head :: head"></head>
+
+
+<body>
+<header class="header">
+  <h1 class="header__title">Egg News</h1>
+</header>
+
+<div class="menu">
+  <ul class="menu__navigation">
+    <li class="menu__option button">
+      <a href="/register">Register</a>
+    </li>
+    <li class="menu__option button">
+      <a href="/login">Login</a>
+    </li>
+  </ul>
+</div>
+
+<div th:if="${success != null}" class="form__messages">
+  <div class="form__error message message-success">
+    <h5> Success 😊: </h5>
+    <p th:text="${success}"></p>
+  </div>
+</div>
+
+<footer class="footer"></footer>
+</body>
+</html>

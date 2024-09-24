@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+
+<head th:replace="/fragments/head :: head"></head>
+
+
+<body>
+<header class="header">
+    <h1 class="header__title">News List</h1>
+</header>
+
+<section id="list" class="table__container">
+    <table class="table">
+        <thead>
+        <tr class="table__column">
+            <th class="table__title">ID</th>
+            <th class="table__title">Title</th>
+            <th class="table__title">Body</th>
+            <th class="table__title">Author</th>
+            <th class="table__title">Date</th>
+            <th class="table__title">Update</th>
+            <th class="table__title">Delete</th>
+        </tr>
+        </thead>
+        <tbody th:each="news: ${news}">
+        <tr class="table__column">
+            <td class="table__row" th:text="${news.id}"></td>
+            <td class="table__row" th:text="${news.title}"></td>
+            <td class="table__row" th:text="${news.body}"></td>
+            <td class="table__row" th:text="${news.author.name}"></td>
+            <td class="table__row" th:text="${news.date}"></td>
+            <td class="table__row">
+                <a th:href="@{/news/set/__${news.id}__}">Update</a>
+            </td>
+            <td class="table__row">
+                <form th:action="@{/news/DELETE/__${news.id}__}" method="POST">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</section>
+
+
+<footer class="footer">
+    <button class="footer__back button">
+        <a href="/news">Back</a>
+    </button>
+</footer>
+</body>
+</html>

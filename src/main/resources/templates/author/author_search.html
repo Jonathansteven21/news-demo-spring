@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="./../css/styles.css"/>
+    <title>Search Author</title>
+</head>
+
+<body>
+<header class="header">
+    <h1 class="header__title">Search Author</h1>
+</header>
+
+<section id="filter">
+    <form class="form" th:action="@{/author/searching}" method="GET">
+        <div class="form__inputs">
+            <div class="form__first-name vertical-center">
+                <label for="name">Name:</label>
+                <input class="form__input" type="text" id="name" name="name" value="" placeholder="Name"/>
+            </div>
+        </div>
+        <button type="submit" class="form__submit vertical-center margin-bottom--4">Search</button>
+    </form>
+</section>
+
+<section th:if="${authors != null}" id="list" class="table__container">
+    <table class="table">
+        <thead>
+        <tr class="table__column">
+            <th class="table__title">ID</th>
+            <th class="table__title">Name</th>
+            <th class="table__title">Update</th>
+        </tr>
+        </thead>
+        <tbody th:each="author: ${authors}">
+        <tr class="table__column">
+            <td class="table__row" th:text="${author.id}"></td>
+            <td class="table__row" th:text="${author.name}"></td>
+            <td class="table__row">
+                <a th:href="@{/author/set/__${author.id}__}">Update</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</section>
+
+
+<footer class="footer">
+    <button class="footer__back button">
+        <a href="/author">Back</a>
+    </button>
+</footer>
+</body>
+</html>

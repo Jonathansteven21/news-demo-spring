@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="./../../css/styles.css"/>
+    <title>Update News</title>
+</head>
+
+<body>
+<header class="header">
+    <h1 class="header__title">Update News</h1>
+</header>
+
+
+<section id="form">
+    <form class="form form__container" th:action="@{/news/set/__${news.id}__}" method="POST">
+        <div class="form__inputs flex-direction--column font-size-medium">
+            <label>
+                <input hidden th:value="${news.id}" name="id">
+            </label>
+            <div class="form__tittle form__column margin-bottom--1">
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" th:value="${news.title}" placeholder="News tittle"/>
+            </div>
+            <div class="form__author form__column margin-bottom--1">
+                <label for="idAuthor">Author</label>
+                <select name="idAuthor" id="idAuthor">
+                    <option th:value="${news.author.id}" th:text="${news.author.name}" selected hidden></option>
+                    <option th:each="author: ${authors}" th:value="${author.id}" th:text="${author.name}"></option>
+                </select>
+            </div>
+            <div class="form__body form__column margin-bottom--1">
+                <label for="body">Body</label>
+                <textarea class="form__textarea" id="body" name="body" placeholder="News body"
+                          th:field="${news.body}"></textarea>
+            </div>
+        </div>
+        <button type="submit" class="form__submit margin-bottom--1">Update</button>
+    </form>
+    <div th:if="${error != null}" class="form__messages">
+        <div class="form__error message message-error">
+            <h5> Error ☹️ </h5>
+            <p th:text="${error}"></p>
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <button class="footer__back button">
+        <a href="/news">Back</a>
+    </button>
+</footer>
+</body>
+</html>
